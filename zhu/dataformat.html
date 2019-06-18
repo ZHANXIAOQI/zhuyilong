@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <title>Document</title>
+</head>
+<body>
+     
+</body>
+</html>
+<script>
+     Date.prototype.formatDate = function(format){
+          // format = format.replace(/ y+/,"2019");no ,the y counts is not know;
+          // RegExp.$n n属于正整数，必须需要test验证通过，获取组的内容，组（内写匹配模式）
+          //获取
+          var year =this.getFullYear();
+          if(/ ( y+) /.test(format)) {//用组的形式加（）
+               var yearContent = RegExp.$1;
+               console.log("yearContent ==>",yearContent);
+               year = year.slice(4-yearContent.length);//从头开始截取索引值到索引值；
+               // year = year.substr(,yearContent);
+               format = format.replace(yearContent,year);
+
+          }
+
+          var o = {
+               M:this.getMonth()+1 ,
+               d:this.getDate() ,
+               h:this.getHours() ,
+               m:this.getMinutes(),
+               s:this.getSeconds()
+          };
+          //遍历替换月日十分秒；
+          for(var k in o){
+               // var reg = / (o[k]+) /no;
+               var reg = new RegExp('('+k+'+)');
+               format = format.replace();
+               if(reg.test(format)){
+                    var content = RegExp.$1;
+                    // var time = o[k] >=10 ||  o[k] : content.length <=1 ? o[k] : '0'+o[k];
+                    var time =o[k]>=10 || content.length <=1 ?  o[k] : '0'+o[k];
+                    format = format.replace(content , time);
+
+                
+                
+                }
+          }
+
+          return format;
+
+
+     }
+     var date = new Date();
+     var result= date.formatDate("yy-MM-dd  hh:mm:ss");
+     console.log(result);
+
+     
+
+</script>
